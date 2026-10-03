@@ -5,7 +5,7 @@
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
-	"main": "@tanstack/react-start/server-entry",
+	"main": "src/server.ts",
 	"observability": {
 		"enabled": true
 	},
@@ -13,8 +13,14 @@
 	"placement": {
 		"mode": "smart"
 	},
-	"route": {
-		"pattern": "anisafifi.com/og*",
-		"zone_name": "anisafifi.com"
-	}
+	"routes": [
+		{
+			"pattern": "www.anisafifi.com/og*",
+			"zone_name": "anisafifi.com"
+		},
+		{
+			"pattern": "www.xerobi.com/og*",
+			"zone_name": "xerobi.com"
+		}
+	]
 }

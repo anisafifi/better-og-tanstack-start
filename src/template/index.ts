@@ -14,4 +14,6 @@ export const templateNames = Object.keys(templates);
 export const resolveTemplate = (name: string | null | undefined): OgTemplate =>
 	(name ? templates[name] : undefined) ?? templates[DEFAULT_TEMPLATE];
 
+export type { OgTheme, OgThemePalette } from "./theme";
+export { ogPalettes, resolveOgTheme } from "./theme";
 export type { OgTemplate, OgTemplateProps } from "./types";

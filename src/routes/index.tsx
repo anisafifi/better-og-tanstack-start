@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { loadGoogleFonts, resolveFontSetup } from "#/lib/core";
 import { createOgHandler } from "#/lib/worker";
-import { resolveTemplate } from "#/template";
+import { resolveOgTheme, resolveTemplate } from "#/template";
 
 const FONT_WEIGHTS = [400, 700];
 const FONT_STACK = 'Inter, "Noto Serif Bengali"';
@@ -22,6 +22,10 @@ export const Route = createFileRoute("/")({
 				});
 				const url = new URL(request.url);
 				const template = resolveTemplate(url.searchParams.get("template"));
+				const theme = resolveOgTheme(
+					url.searchParams.get("theme"),
+					request.headers.get("sec-ch-prefers-color-scheme"),
+				);
 				const title = url.searchParams.get("title") ?? "OG Image Generator";
 				const description = url.searchParams.get("description") ?? "";
 
@@ -32,11 +36,15 @@ export const Route = createFileRoute("/")({
 							description,
 							fontFamily: FONT_STACK,
 							og,
+							theme,
 							title,
 						}),
 				});
 
-				return handler(request);
+				const response = await handler(request);
+				response.headers.set("Vary", "Sec-CH-Prefers-Color-Scheme");
+
+				return response;
 			},
 		},
 	},
