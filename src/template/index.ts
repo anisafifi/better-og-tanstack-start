@@ -1,3 +1,4 @@
+import { anisafifiTemplate } from "./anisafifi";
 import { defaultTemplate } from "./default";
 import { minimalTemplate } from "./minimal";
 import type { OgTemplate } from "./types";
@@ -7,6 +8,7 @@ export const DEFAULT_TEMPLATE = "default";
 export const templates: Record<string, OgTemplate> = {
 	[DEFAULT_TEMPLATE]: defaultTemplate,
 	minimal: minimalTemplate,
+	anisafifi: anisafifiTemplate,
 };
 
 export const templateNames = Object.keys(templates);
